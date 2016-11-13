@@ -48,7 +48,7 @@ func Vote(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
    // fmt.Println("Validated Votes")
     s := strings.Split(User.Cookie, "@")
     username := s[0]
-    category := s[1]
+    //category := s[1]
    
    for i := 0; i < EC.Number_of_votes; i++ {
     	 
@@ -89,7 +89,7 @@ func Paper(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
     }else{
         // fmt.Println("CurreAAAAAAAAAAAAAAAAaa",current_votes)
         t, _ := template.ParseFiles(SC.Base_Path+"src/views/poll.html")
-        t.Execute(w )
+        t.Execute(w ,nil)
     }
 
 }

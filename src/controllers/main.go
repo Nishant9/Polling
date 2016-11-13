@@ -13,7 +13,7 @@ import (
 
 func main() {
 // helping-servers setup
-     auth.Login
+//     auth.Login
     dial.Setup_redis();
     defer dial.Close_redis()
 

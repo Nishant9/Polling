@@ -48,7 +48,9 @@ func Login(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
     }
 //fmt.Println("Logged in from remote server")
     decoy := ""
-    if(guard==1) decoy="decoy"
+    if(guard==1) {
+        decoy="decoy"
+    }
     cookie := model.Bake(Raw_User.Username + "@" + Category,decoy);
     http.SetCookie(w,&http.Cookie{Name:"ACAVote",Value:cookie})
     http.Redirect(w,r,"/paper",302)
@@ -67,7 +69,9 @@ func Logout(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
     }
     decoy:=""
     guard := model.Check_logged_in(cookie)
-    if(guard==1) decoy:="decoy"
+    if(guard==1) {
+        decoy="decoy"
+    }
     model.Burn(cookie,decoy);
         http.Redirect(w,r,"/",302)
     
