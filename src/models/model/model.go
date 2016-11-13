@@ -3,13 +3,14 @@ package model
 import (
 	"fmt"
  	EC "../../conf/election_conf" 
- 	SCC "../../conf/scrapbook_conf" 
+ //	SCC "../../conf/scrapbook_conf" 
  	SC "../../conf/server_conf" 
  	"sort"
  	"time"
- 	"html"
- 	"net/url"
+/* 	"html"
+ 	"net/url"*/
  	"math/rand"
+ 	"regexp"
 )
 
 
@@ -24,6 +25,9 @@ type Electorate_Profile struct{
 	Cookie string
 	Votes []string
 }
+
+
+var Pass_allowed = regexp.MustCompile("[a-zA-Z_0-9]*")
 
 type Pass_Profile struct{
 	Cookie string
@@ -57,8 +61,12 @@ func (raw *Electorate_Login) Validate() (string,string){
 
 func Check_logged_in(cookie string) int {
 	//fmt.Println("Just checking ",SC.Redisdb.SIsMember(SC.Cookiedb,cookie))
-	if(SC.Redisdb.SIsMember(SC.Cookiedb,cookie).Val()) return 0
-	if(SC.Redisdb.SIsMember(SC.Cookiedb,cookie+"decoy").Val()) return 1
+	if(SC.Redisdb.SIsMember(SC.Cookiedb,cookie).Val()){
+		return 0
+	}
+	if(SC.Redisdb.SIsMember(SC.Cookiedb,cookie+"decoy").Val()) {
+		return 1
+	}
 	return 2
 }
 
@@ -79,7 +87,7 @@ func (raw *Electorate_Profile) Validate() bool {
 }
 
 func (raw *Pass_Profile) Validate() bool {
-	if SCC.Candidates[raw.For] == "" {
+	if len(raw.New_Pass)>=EC.Pass_Length && Pass_allowed.MatchString(raw.New_Pass) {
 			fmt.Println("Here3")
 			return true
 		}

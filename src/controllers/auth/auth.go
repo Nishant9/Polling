@@ -3,7 +3,6 @@ package auth
 import (
  SC "../../conf/server_conf" 
  "../../models/model"
- "github.com/jtblin/go-ldap-client"
  "net/http"
  "github.com/julienschmidt/httprouter"
  "html/template"

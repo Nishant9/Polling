@@ -87,7 +87,7 @@ func Paper(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
         http.Redirect(w,r,"/",302)
         return
     }else{
-       // fmt.Println("CurreAAAAAAAAAAAAAAAAaa",current_votes)
+        // fmt.Println("CurreAAAAAAAAAAAAAAAAaa",current_votes)
         t, _ := template.ParseFiles(SC.Base_Path+"src/views/poll.html")
         t.Execute(w )
     }

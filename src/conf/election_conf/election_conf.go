@@ -16,5 +16,6 @@ var Candidates = map[string]string{
 }
 
 const Number_of_votes int = 1
+const Pass_Length int =8
 
 
