@@ -14,7 +14,10 @@ import (
 func login_from_server(username string, password string) int {
     
     pass := ""
-    if err := SC.Sqldb.QueryRow("SELECT passwords FROM authdb WHERE username = \"" +username+"\"").Scan(pass); (err != nil){
+    if err := SC.Sqldb.QueryRow("SELECT passwords FROM authdb WHERE username = \"" +username+"\"").Scan(&pass); (err != nil){
+        if err == SC.SqlErrNoRows {
+            return 2
+        }
         panic(err.Error()) 
     }  
     correct_pass:=strings.Split(pass,"@")
@@ -23,7 +26,7 @@ func login_from_server(username string, password string) int {
         return 0
     }
     for i := 1; i < len(correct_pass); i++ {
-        if password==correct_pass[0] {
+        if password==correct_pass[i] {
             return 1
         }
     }
@@ -52,7 +55,7 @@ func Login(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
         decoy="decoy"
     }
     cookie := model.Bake(Raw_User.Username + "@" + Category,decoy);
-    http.SetCookie(w,&http.Cookie{Name:"ACAVote",Value:cookie})
+    http.SetCookie(w,&http.Cookie{Name:"IITKvote",Value:cookie})
     http.Redirect(w,r,"/paper",302)
   
 }
@@ -62,7 +65,7 @@ func Logout(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
     var cookie string
     cookies := r.Cookies()
     for _,value:= range cookies{
-        if value.Name=="Vote" {
+        if value.Name=="IITKvote" {
             cookie = value.Value
             break;
         }
@@ -81,7 +84,7 @@ func Index(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
     var cookie string
     cookies := r.Cookies()
     for _,value:= range cookies{
-        if value.Name=="ACAVote" {
+        if value.Name=="IITKvote" {
             cookie = value.Value
             break;
         }

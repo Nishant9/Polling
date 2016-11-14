@@ -16,5 +16,4 @@ var Candidates = map[string]string{
 	"audi": "asd",
 }
 
-var ValidNote = regexp.MustCompile("[ a-zA-Z0-9:,\\./\n'&@_]*$")
-
+var Pass_allowed = regexp.MustCompile("[a-zA-Z_0-9]*")

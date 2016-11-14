@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>ACA</title>
+	<title>IITK</title>
 
 	<!-- Google Fonts -->
 	<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Lato:400,100,300,700,900' rel='stylesheet' type='text/css'>
@@ -29,22 +29,17 @@
 <form action="/ballot" method="POST">
 
 			</div>
-			<label for="1">First</label>
+			<label for="1">To</label>
 			<br/>
+
+
 			  	<select name="1">
-			  <option value="volvo">Volvo</option>
+<!-- 		{{range $index, $element := .}} <br/>{{$element}}  {{end}}
+	</td> -->
+		  <option value="volvo">Volvo</option>
 			  <option value="saab">Saab</option>
 			  <option value="mercedes">Mercedes</option>
-			  <option value="audi">Audi</option>
-				</select>
-			<br/>
-			<label for="2">Second</label>
-			<br/>
-			 	<select name="2">
-			 <option value="volvo">Volvo</option>
-			 <option value="saab">Saab</option>
-			 <option value="mercedes">Mercedes</option>
-			 <option value="audi">Audi</option>
+			  <option value="audi">Audi</option> -->
 				</select>
 			<br/>
 			<br/>
@@ -52,18 +47,13 @@
 			<br/>
 </form>
 <br/>
-		<tr> Current Votes
-	<td>
 
-		{{range $index, $element := .}} <br/>{{$element}}  {{end}}
-	</td>
-</tr>	
 		<br/>
-		<a href="/note"><p class="large" style="color:iridium">Notes</p></a>
+		<a href="/note"><p class="large" style="color:iridium">Change Password</p></a>
 		<a href="/logout"><p class="large" style="color:iridium">Logout</p></a>
 		</div>
 	</div>
 
 <h2>Poll </h2>
-<h4 style="color:white"> Give 2 votes .. Voting method is iVR .. Both Votes cannot be cast to same person or else votes won't count</h4>
+<h4 style="color:white"> Cast your Vote!!</h4>
 

@@ -1,0 +1,4 @@
+create database poll_1;
+use poll_1;
+create table authdb (username VARCHAR(20) UNIQUE KEY PRIMARY KEY, passwords TEXT);
+create table ballot (username VARCHAR(20) PRIMARY KEY, vote_0 VARCHAR(40)); -- add as many as vote_i

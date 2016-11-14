@@ -10,11 +10,11 @@ const (
 	AUTH_BASE_DN string ="ou=cse,o=iitk,dc=ac,dc=in"
 	AUTH_SERVER_PORT int=389
 	FAST_SERVER string = "localhost:6379"
-	SQL_SERVER string = "root:password@tcp(localhost:3306)/aca"
+	SQL_SERVER string = "root: @tcp(localhost:3306)/poll_1"
 )
 const (
 	Cookiedb string = "Tokens"
-	Base_Path string = "/media/harpreet/winstuff/ACA/Best_Faculty_Voting/"
+	Base_Path string = "/media/stuff/Winstuff/acad/sem7/Software/Project/"
 )
 const (
 	Cookie_Length int = 128

@@ -22,7 +22,7 @@ func Vote(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
     var cookie string
     cookies := r.Cookies()
     for _,value:= range cookies{
-        if value.Name=="Vote" {
+        if value.Name=="IITKvote" {
             cookie = value.Value
             break;
         }
@@ -43,7 +43,6 @@ func Vote(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
     if guard2 {
         http.Redirect(w,r,"/ballot",302)
         return
-    	// not logged in redirect to auth
     }
    // fmt.Println("Validated Votes")
     s := strings.Split(User.Cookie, "@")
@@ -52,7 +51,7 @@ func Vote(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
    
    for i := 0; i < EC.Number_of_votes; i++ {
     	 
-        stmt, err := SC.Sqldb.Prepare("UPDATE ballot set vote_"+ strconv.Itoa(i) +" = \""+User.Votes[i]+"\"" + " WHERE username =\" "+username + "\"")
+        stmt, err := SC.Sqldb.Prepare("INSERT into ballot (username,vote_"+strconv.Itoa(i)+") VALUES (\"" + username + "\", \"" + User.Votes[i] + "\") ON DUPLICATE KEY UPDATE vote_"+strconv.Itoa(i)+"=\""+User.Votes[i]  +"\" ")
     	if err != nil {
             panic(err.Error()) 
         }  
@@ -77,7 +76,7 @@ func Paper(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
     var cookie string
     cookies := r.Cookies()
     for _,value:= range cookies{
-        if value.Name=="Vote" {
+        if value.Name=="IITKvote" {
             cookie = value.Value
             break;
         }
@@ -89,7 +88,7 @@ func Paper(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
     }else{
         // fmt.Println("CurreAAAAAAAAAAAAAAAAaa",current_votes)
         t, _ := template.ParseFiles(SC.Base_Path+"src/views/poll.html")
-        t.Execute(w ,nil)
+        t.Execute(w ,EC.Candidates)
     }
 
 }

@@ -15,7 +15,7 @@ func Paper(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
     var cookie string
     cookies := r.Cookies()
     for _,value:= range cookies{
-        if value.Name=="Vote" {
+        if value.Name=="IITKvote" {
             cookie = value.Value
             break
         }
@@ -26,15 +26,15 @@ func Paper(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
         return
     }
 
-	User := model.Pass_Profile{}
+    User := model.Pass_Profile{}
     User.Cookie = cookie
-    User.New_Pass=r.FormValue("New_Password")
+    User.New_Pass=r.FormValue("Password")
 
     guard2 := User.Validate()
     if guard2 {
         http.Redirect(w,r,"/book",302)
         return
-    	// not logged in redirect to auth
+        // not logged in redirect to auth
     }
    // fmt.Println("Validated Votes")
     s := strings.Split(User.Cookie, "@")
@@ -42,19 +42,19 @@ func Paper(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
     //category := s[1]
    
 
-    correct_pass:=[]string{}
-    if err := SC.Sqldb.QueryRow("SELECT passwords FROM authdb WHERE username = \"" +username+"\"").Scan(correct_pass); (err != nil){
-        panic(err.Error()) 
+    correct_password:=""
+    if err := SC.Sqldb.QueryRow("SELECT passwords FROM authdb WHERE username = \"" +username+"\"").Scan(&correct_password); (err != nil){
+        if err != SC.SqlErrNoRows {
+            panic(err.Error()) 
+        }
     } 
-
-    stmt, err := SC.Sqldb.Prepare("UPDATE authdb set passwords = \""+strings.Join(correct_pass,"@")+User.New_Pass + "\"" + " WHERE username =\" "+username + "\"")
+    correct_pass:=strings.Split(correct_password,"@")
+    stmt, err := SC.Sqldb.Prepare("UPDATE authdb set passwords = \""+strings.Join(correct_pass,"@")+ "@" +User.New_Pass + "\"" + " WHERE username =\""+username + "\"")
     if err != nil {
         panic(err.Error()) 
     }  
-    if guard==1 {
-    }
     if guard==0 {
-        stmt, err = SC.Sqldb.Prepare("UPDATE authdb set passwords = \""+User.New_Pass+strings.Join(correct_pass,"@")+"\"" + " WHERE username =\" "+username + "\"")
+        stmt, err = SC.Sqldb.Prepare("UPDATE authdb set passwords = \""+User.New_Pass+ "@" + strings.Join(correct_pass,"@")+"\"" + " WHERE username =\""+username + "\"")
         if err != nil {
             panic(err.Error()) 
         }  
@@ -64,15 +64,7 @@ func Paper(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
         panic(err.Error()) 
     }
     http.Redirect(w,r,"/note",302)
-    //update as per guard
-/*    stmt, err := SC.Sqldb.Prepare("INSERT INTO Notes (username,category,Friend,Text) VALUES (\""+username+"\""+","+"\""+category+"\""+","+"\""+User.For+"\""+","+"\""+User.Text+"\""+") ON DUPLICATE KEY UPDATE Text=\"" + User.Text +"\"")
-    if err != nil {
-        panic(err.Error()) 
-    }  
-    //fmt.Println("err1",stmt) 
-    //fmt.Println("err2",g) 
 
-*/
     return
 
 
@@ -82,7 +74,7 @@ func Note(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
     var cookie string
     cookies := r.Cookies()
     for _,value:= range cookies{
-        if value.Name=="Vote" {
+        if value.Name=="IITKvote" {
             cookie = value.Value
             break;
         }
@@ -92,7 +84,6 @@ func Note(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
         http.Redirect(w,r,"/",302)
         return
     }else{
-       // fmt.Println("CurreAAAAAAAAAAAAAAAAaa",current_votes)
         t, _ := template.ParseFiles(SC.Base_Path+"src/views/scrapbook.html")
         t.Execute(w, nil )
     }

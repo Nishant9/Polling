@@ -3,14 +3,13 @@ package model
 import (
 	"fmt"
  	EC "../../conf/election_conf" 
- //	SCC "../../conf/scrapbook_conf" 
+ 	ScC "../../conf/scrapbook_conf" 
  	SC "../../conf/server_conf" 
  	"sort"
  	"time"
 /* 	"html"
  	"net/url"*/
  	"math/rand"
- 	"regexp"
 )
 
 
@@ -27,7 +26,7 @@ type Electorate_Profile struct{
 }
 
 
-var Pass_allowed = regexp.MustCompile("[a-zA-Z_0-9]*")
+
 
 type Pass_Profile struct{
 	Cookie string
@@ -87,11 +86,11 @@ func (raw *Electorate_Profile) Validate() bool {
 }
 
 func (raw *Pass_Profile) Validate() bool {
-	if len(raw.New_Pass)>=EC.Pass_Length && Pass_allowed.MatchString(raw.New_Pass) {
+	if len(raw.New_Pass)>=EC.Pass_Length && ScC.Pass_allowed.MatchString(raw.New_Pass) {
 			fmt.Println("Here3")
-			return true
+			return false
 		}
-	return false
+	return true
 }
 
 //SAdd to allow only one session per user // there is no expiry for the cookie
