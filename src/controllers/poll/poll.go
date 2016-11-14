@@ -48,10 +48,10 @@ func Vote(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
     s := strings.Split(User.Cookie, "@")
     username := s[0]
     //category := s[1]
-   
+   hashed_username:=model.Hash(username)
    for i := 0; i < EC.Number_of_votes; i++ {
     	 
-        stmt, err := SC.Sqldb.Prepare("INSERT into ballot (username,vote_"+strconv.Itoa(i)+") VALUES (\"" + username + "\", \"" + User.Votes[i] + "\") ON DUPLICATE KEY UPDATE vote_"+strconv.Itoa(i)+"=\""+User.Votes[i]  +"\" ")
+        stmt, err := SC.Sqldb.Prepare("INSERT into ballot (username,vote_"+strconv.Itoa(i)+") VALUES (\"" + hashed_username + "\", \"" + User.Votes[i] + "\") ON DUPLICATE KEY UPDATE vote_"+strconv.Itoa(i)+"=\""+User.Votes[i]  +"\" ")
     	if err != nil {
             panic(err.Error()) 
         }  

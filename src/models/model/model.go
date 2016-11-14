@@ -10,6 +10,8 @@ import (
 /* 	"html"
  	"net/url"*/
  	"math/rand"
+ 	"crypto/sha1"
+	"encoding/hex"
 )
 
 
@@ -103,4 +105,10 @@ func Bake(key string,decoy string) string{
 
 func Burn(cookie string,decoy string) {
 	SC.Redisdb.SRem(SC.Cookiedb,cookie+decoy)
+}
+
+func Hash(username string) string {
+	h := sha1.New()
+	h.Write([]byte(username))
+    return hex.EncodeToString(h.Sum(nil))
 }
