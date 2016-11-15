@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Polling Admin</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="starter-template.css" rel="stylesheet">
+    <style>
+      body {
+      padding-top: 50px;
+      }
+      .starter-template {
+      padding: 40px 15px;
+      text-align: center;
+      }
+      .list-group-item {
+      display: list-item;
+      }
+    </style>
+
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Polling Admin</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="/admin/conf">Update Paticipants</a></li>
+            <li><a href="/pass">Generate Passwords</a></li>
+            <li><a href="/conf">Generate Config</a></li>
+            <li><a href="/mail">Mail Passwords</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+
+      <div class="starter-template">
+        <h1>Quick Start Guide</h1>
+        <p class="lead">This is a brief overview of setting up an election.</p>
+        <div class="container">
+	        <div class="row">
+		        <div class="col-xs-12">
+			        <ol class="list-group">
+				        <li class="list-group-item">
+					        <p>Go to <a href="/admin/conf">Update Paticipants</a> and add candidates and voters.
+                    Candidates have to be added one by one, whereas voters can be added using .csv files also.
+                    For candidates, put name of photo in photo field.
+                    For voters, in bulk voter adding, give a tag and upload a csv file which must contain username,
+                    and email if you want mailing also. More than one csv file can be uploaded.
+                    There are several options for password like LDAP,
+                    Randomly generated and sent over email, optionally they can also be supplied alongwith csv
+                    or in the form.
+                  </p>
+				        </li>
+				        <li class="list-group-item">
+					        <p>After adding participants, click <a href="/pass">Generate Passwords</a> if you want randomly
+                    generated passwords. After this, click <a href="/conf">Generate Config</a> and download config
+                    file. Click <a href="/mail">Mail Passwords</a> whenever you want to mail passwords to voters.
+                  </p>
+				        </li>
+				        <li class="list-group-item">
+					        <p>After this, make sure sql tables are setup <b>RUN SQL SCRIPT</b> and sql server is running.
+                    Redis server is running, and <b> PHOTOS</b>
+                    <b> run script</b>
+                  </p>
+				        </li>
+			        </ol>
+		        </div>
+	        </div>
+        </div>
+      </div>
+
+    </div><!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </body>
+</html>
