@@ -28,7 +28,7 @@ var List = map[string][]string{
     voter_list = [t[0] for t in list(Voter.objects.all().values_list('name'))]
     if len(voter_list) > 0 :
         config_file += '"manual": []string{ '
-        config_file += str(voter_list)[1:-1].replace('\'','"')
+        config_file += str(sorted(voter_list))[1:-1].replace('\'','"')
         config_file += ',},\n'
 
     bulkvoter_list = list(BulkVoter.objects.all().values_list('tag', 'docfile', 'id'))
@@ -60,7 +60,7 @@ var List = map[string][]string{
                     temp_voter.save()
             if len(voter_list) > 0 :
                 config_file +=  ('"' +tag + '" : []string{ ')
-                config_file += str(voter_list)[1:-1].replace('\'','"')
+                config_file += str(sorted(voter_list))[1:-1].replace('\'','"')
                 config_file += '},\n'
             BulkVoter.objects.get(id = i).delete()
 
@@ -79,10 +79,13 @@ var List = map[string][]string{
 const Number_of_votes int = 1
 const Pass_Length int =8
     '''
-
-    response = HttpResponse(config_file, content_type='text/plain')
-    response['Content-Disposition'] = 'attachment; filename=election_conf.go'
-    return response
+    f = open('../election_conf.go','w')
+    print(config_file,file = f)
+    f.close()
+    # response = HttpResponse(config_file, content_type='text/plain')
+    # response['Content-Disposition'] = 'attachment; filename=election_conf.go'
+    # return response
+    return redirect(index)
 
 import string
 import random
@@ -172,7 +175,10 @@ create table ballot (username VARCHAR(50) PRIMARY KEY, vote_0 VARCHAR(40)); -- a
     voter_list = list(Voter.objects.all().values_list('name','passwd'))
     for us, pwd in voter_list :
         sql += insert_holder.format(user = us,passwd = pwd)
-    response = HttpResponse(sql, content_type='text/plain')
-    response['Content-Disposition'] = 'attachment; filename=sql_setup.sql'
-    return response
-
+    f = open('../sql_setup.sql','w')
+    print(sql,file = f)
+    f.close()
+    # response = HttpResponse(sql, content_type='text/plain')
+    # response['Content-Disposition'] = 'attachment; filename=sql_setup.sql'
+    # return response
+    return redirect(index)

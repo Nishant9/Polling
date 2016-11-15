@@ -7,3 +7,4 @@ create table ballot (username VARCHAR(50) PRIMARY KEY, vote_0 VARCHAR(40)); -- a
 INSERT into authdb (username,passwords) VALUES ('agnes', 'Hola');
 INSERT into authdb (username,passwords) VALUES ('nishant', 'paper');
 INSERT into authdb (username,passwords) VALUES ('hsinghc', 'singhc');
+
