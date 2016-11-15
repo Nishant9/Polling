@@ -11,6 +11,8 @@ const (
 	AUTH_SERVER_PORT int=389
 	FAST_SERVER string = "localhost:6379"
 	SQL_SERVER string = "root: @tcp(localhost:3306)/poll_1"
+	LOGIN_SERVER string = "local"
+	//LOGIN_SERVER string = "ldap"
 )
 const (
 	Cookiedb string = "Tokens"

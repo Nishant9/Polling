@@ -33,14 +33,10 @@
 			<br/>
 
 
-			  	<select name="1">
-<!-- 		{{range $index, $element := .}} <br/>{{$element}}  {{end}}
-	</td> -->
-		  <option value="volvo">Volvo</option>
-			  <option value="saab">Saab</option>
-			  <option value="mercedes">Mercedes</option>
-			  <option value="audi">Audi</option> -->
-				</select>
+		{{ range $key, $value := . }}
+		<input type="radio" name="1" value="{{$key}}" checked> {{$key}} <img src="/res/photos/{{$value}}" width="60px" height="60px"><br>
+		
+		{{ end }}
 			<br/>
 			<br/>
 			<button type="submit">Vote</button>

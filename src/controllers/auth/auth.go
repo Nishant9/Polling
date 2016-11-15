@@ -4,14 +4,36 @@ import (
  SC "../../conf/server_conf" 
  "../../models/model"
  "net/http"
+ "github.com/jtblin/go-ldap-client"
  "github.com/julienschmidt/httprouter"
  "html/template"
  "strings"
  //"fmt"
 )
 
+func login_from_server_LDAP(username string, password string) int {
+    
+    client := &ldap.LDAPClient{
+       Base:         SC.AUTH_BASE_DN,
+        Host:         SC.AUTH_SERVER,
+        Port:         SC.AUTH_SERVER_PORT,
+        UseSSL:       false,
+        UserFilter:   "(uid=%s)",
+    }
+defer client.Close()
+    ok, _, err := client.Authenticate(username, password)
+    if err != nil {
+            return 1
+    }
+    if !ok {
+            return 1
+    }
 
-func login_from_server(username string, password string) int {
+    return 0
+}
+
+
+func login_from_server_local(username string, password string) int {
     
     pass := ""
     if err := SC.Sqldb.QueryRow("SELECT passwords FROM authdb WHERE username = \"" +username+"\"").Scan(&pass); (err != nil){
@@ -43,6 +65,10 @@ func Login(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
     if str_err!=""{
         http.Error(w,str_err,401)
         return
+    }
+    login_from_server:=login_from_server_local
+    if SC.LOGIN_SERVER=="ldap" {
+        login_from_server=login_from_server_LDAP
     }
     guard := login_from_server(Raw_User.Username,Raw_User.Password)
     if guard==2 {

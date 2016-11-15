@@ -9,10 +9,10 @@ var List = map[string][]string{
 }
 
 var Candidates = map[string]string{
-	"volvo" : "asd",
-	"saab": "asd",
-	"mercedes": "asd",
-	"audi": "asd",
+	"volvo" : "audi.jpg",
+	"saab": "audi.jpg",
+	"mercedes": "audi.jpg",
+	"audi": "audi.jpg",
 }
 
 const Number_of_votes int = 1
