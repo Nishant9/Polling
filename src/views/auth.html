@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>ACA</title>
+
+	<!-- Google Fonts -->
+	<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Lato:400,100,300,700,900' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="/res/css/animate.css">
+	<!-- Custom Stylesheet -->
+	<link rel="stylesheet" href="/res/css/style.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+
+<body>
+	<div class="container">
+		<div class="top">
+			<h1 id="title" class="hidden"><span id="logo">ACA <span>CSE</span></span></h1>
+		</div>
+
+		<div class="login-box animated fadeInUp">
+			<div class="box-header">
+				<h2>Log In</h2>
+<form action="/login" method="POST">
+
+			</div>
+			<label for="Username">Username</label>
+			<br/>
+			<input type="text" name="Username" id="Username">
+			<br/>
+			<label for="Password">Password</label>
+			<br/>
+			<input type="Password" id="Password" name="Password" size=20 autocomplete="no">
+			<br/>
+			<button type="submit">Sign In</button>
+			<br/>
+</form>
+			
+			<a title="We won't be saving the credentials, neither do we already have them. We will forward these credentials to cse LDAP server and authenticate"><p class="small">Privacy Issues?</p></a>
+		</div>
+	</div>
+</body>
+
+<script>
+	$(document).ready(function () {
+    	$('#logo').addClass('animated fadeInDown');
+    	$("input:text:visible:first").focus();
+	});
+	$('#username').focus(function() {
+		$('label[for="username"]').addClass('selected');
+	});
+	$('#username').blur(function() {
+		$('label[for="username"]').removeClass('selected');
+	});
+	$('#password').focus(function() {
+		$('label[for="password"]').addClass('selected');
+	});
+	$('#password').blur(function() {
+		$('label[for="password"]').removeClass('selected');
+	});
+</script>
+
+</html>
+
+ 
