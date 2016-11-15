@@ -9,6 +9,7 @@ import (
     "./scrapbook" 
     "log"
     "net/http"
+    "os"
 )
 
 func main() {
@@ -31,5 +32,5 @@ func main() {
     router.POST("/book", scrapbook.Paper)
     router.GET("/logout", auth.Logout)
     router.ServeFiles("/res/*filepath", http.Dir(SC.Base_Path+"src/views"))
-    log.Fatal(http.ListenAndServe(":8080", router))
+    log.Fatal(http.ListenAndServe(":" + os.Args[1], router))
 }

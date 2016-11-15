@@ -3,8 +3,11 @@ admin :
 
 configure :
 	cp ./election_conf.go src/conf/election_conf/
-	mysql -h 'Alchemist' -u 'root' -p < sql_setup.sql
+	mysql -h 'localhost' -u 'root' -p < sql_setup.sql
 
 run :
-	cd src/controllers && go run main.go
+	cd src/controllers && go run main.go 8080
+
+result :
+	mysql -h 'localhost' -u 'root' -p < result.sql
 	
