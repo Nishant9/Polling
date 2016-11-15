@@ -29,7 +29,7 @@ var List = map[string][]string{
     if len(voter_list) > 0 :
         config_file += '"manual": []string{ '
         config_file += str(voter_list)[1:-1].replace('\'','"')
-        config_file += '},\n'
+        config_file += ',},\n'
 
     bulkvoter_list = list(BulkVoter.objects.all().values_list('tag', 'docfile', 'id'))
 
@@ -67,11 +67,11 @@ var List = map[string][]string{
     config_file += '}\n\n'
 
 
-    candidate_list = [t[0] for t in list(Candidate.objects.all().values_list('name'))]
+    candidate_list = [t for t in list(Candidate.objects.all().values_list('name','photo'))]
     if len(candidate_list) > 0 :
         config_file += 'var Candidates = map[string]string{\n'
-        for cd in candidate_list :
-            config_file += ( '"' + cd + '" : "asd",\n' )
+        for cd,ph in candidate_list :
+            config_file += ( '"' + cd + '" : ' + '"' + ph + '",\n' )
         config_file += '}\n'
 
 

@@ -6,6 +6,8 @@ admin :
 
 configure :
 	cp ./election_conf.go src/conf/election_conf/
+	cp ./server_conf.go src/conf/server_conf/
+	if [ -d "./photos" ]; then cp -r ./photos src/views/; fi
 	mysql -h $(host) -u 'root' -p < sql_setup.sql
 
 run :
@@ -13,4 +15,3 @@ run :
 
 result :
 	mysql -h $(host) -u 'root' -p < result.sql
-	
