@@ -76,7 +76,7 @@ var List = map[string][]string{
 
 
     config_file += '''
-const Number_of_votes int = 1
+const Number_of_votes int =1
 const Pass_Length int =8
     '''
     f = open('./election_conf.go','w')

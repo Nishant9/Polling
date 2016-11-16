@@ -2,7 +2,7 @@
 package election_conf
 
 var List = map[string][]string{
-"manual": []string{ "agnes", "nishant", "hsinghc",},
+"manual": []string{ "agnes", "hsinghc", "nishant",},
 }
 
 var Candidates = map[string]string{
@@ -10,6 +10,6 @@ var Candidates = map[string]string{
 "Jerry" : "jerry.jpeg",
 }
 
-const Number_of_votes int = 1
+const Number_of_votes int =3
 const Pass_Length int =8
     
