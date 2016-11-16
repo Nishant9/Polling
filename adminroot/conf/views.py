@@ -79,7 +79,7 @@ var List = map[string][]string{
 const Number_of_votes int = 1
 const Pass_Length int =8
     '''
-    f = open('../election_conf.go','w')
+    f = open('./election_conf.go','w')
     print(config_file,file = f)
     f.close()
     # response = HttpResponse(config_file, content_type='text/plain')
@@ -175,9 +175,10 @@ create table ballot (username VARCHAR(50) PRIMARY KEY, vote_0 VARCHAR(40)); -- a
     voter_list = list(Voter.objects.all().values_list('name','passwd'))
     for us, pwd in voter_list :
         sql += insert_holder.format(user = us,passwd = pwd)
-    f = open('../sql_setup.sql','w')
+    f = open('./sql_setup.sql','w')
     print(sql,file = f)
     f.close()
+    print(sql)
     # response = HttpResponse(sql, content_type='text/plain')
     # response['Content-Disposition'] = 'attachment; filename=sql_setup.sql'
     # return response
