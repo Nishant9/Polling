@@ -29,14 +29,7 @@
 <form action="/ballot" method="POST">
 
 			</div>
-			<label for="1">To</label>
-			<br/>
-
-
-		{{ range $key, $value := . }}
-		<input type="radio" name="1" value="{{$key}}" checked> {{$key}} <img src="/res/photos/{{$value}}" width="60px" height="60px"><br>
-		
-		{{ end }}
+			<label for="1">To</label>	<br/> {{ range $key, $value := . }} <input type="radio" name="1" value="{{$key}}" checked> {{$key}} <img src="/res/photos/{{$value}}" width="60px" height="60px"><br> {{ end }}
 			<br/>
 			<br/>
 			<button type="submit">Vote</button>
