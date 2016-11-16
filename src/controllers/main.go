@@ -9,12 +9,20 @@ import (
 	"github.com/julienschmidt/httprouter"
 	"log"
 	"net/http"
+	"syscall"
 	"os"
+	"os/signal"
 )
 
 func main() {
-	// helping-servers setup
-	//     auth.Login
+	
+	c := make(chan os.Signal, 2)
+    signal.Notify(c, os.Interrupt, syscall.SIGTERM)
+    go func() {
+        <-c
+        os.Exit(1)
+    }()
+
 	dial.Setup_redis()
 	defer dial.Close_redis()
 
